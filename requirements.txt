@@ -9,3 +9,15 @@ tqdm
 youtube-transcript-api 
 pytube 
 tiktoken
+pypdf
+unstructured
+python-pptx
+docx2txt
+networkx
+pandas
+xlrd
+openpyxl
+gdown
+pytest
+PyPDF2
+psutil
