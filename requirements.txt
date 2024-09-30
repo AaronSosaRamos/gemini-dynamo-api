@@ -3,6 +3,11 @@ langchain
 langchain-google-genai
 langchain_core
 langchain-community
+langchain_openai
+openai
+jq
+lark
+chromadb
 uvicorn[standard]
 python-dotenv
 tqdm
@@ -21,3 +26,4 @@ gdown
 pytest
 PyPDF2
 psutil
+langchain-cli

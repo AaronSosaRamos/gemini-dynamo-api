@@ -17,7 +17,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.prompts import PromptTemplate
 from langchain_google_genai import GoogleGenerativeAI
 from langchain_core.output_parsers import JsonOutputParser
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from app.api.error_utilities import VideoTranscriptError
 from langchain_core.messages import HumanMessage
 from typing import Optional, List
