@@ -17,4 +17,5 @@ class FileType(Enum):
     GSLIDE = "gslide"
     GPDF = 'gpdf'
 
-    YOUTUBE_URL = 'youtube_url' 
+    YOUTUBE_URL = 'youtube_url'
+    IMG = 'img' 
