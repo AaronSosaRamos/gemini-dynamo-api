@@ -1,8 +1,15 @@
-from app.api.features.dynamo_feature import generate_concepts_from_img, generate_flashcards, get_summary, summarize_transcript_youtube_url
+from app.api.features.dynamo_feature import (
+    generate_concepts_from_img, 
+    generate_flashcards, 
+    get_summary, 
+    summarize_transcript_youtube_url
+)
 from app.api.features.schemas.key_concept_retriever_structured_data_schema import StructuredDataStudyInputData
 from app.api.features.schemas.schemas import VideoAnalysisRequestArgs
 from fastapi import APIRouter, Depends
+from app.api.features.schemas.semantic_analysis_schemas import SemanticAnalysisInputData
 from app.api.features.structured_data_study import run_chain
+from app.api.features.semantic_analysis import run_chain as semantic_analysis_run_chain
 from app.api.logger import setup_logger
 from app.api.auth.auth import key_check
 
@@ -40,5 +47,14 @@ async def submit_tool( data: StructuredDataStudyInputData, _ = Depends(key_check
     logger.info(f"File URL loaded: {data.file_url}")
 
     result = run_chain(data)
+
+    return result
+
+@router.post("/semantic-analysis")
+async def submit_tool( data: SemanticAnalysisInputData, _ = Depends(key_check)):
+    
+    logger.info(f"File URL loaded: {data.file_url}")
+
+    result = semantic_analysis_run_chain(data)
 
     return result

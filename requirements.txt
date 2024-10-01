@@ -26,4 +26,5 @@ gdown
 pytest
 PyPDF2
 psutil
-langchain-cli
+rank_bm25
+faiss-cpu
