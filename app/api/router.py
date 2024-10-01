@@ -9,11 +9,13 @@ from app.api.features.schemas.relation_mapping_schemas import RelationMappingInp
 from app.api.features.schemas.schemas import VideoAnalysisRequestArgs
 from fastapi import APIRouter, Depends
 from app.api.features.schemas.semantic_analysis_schemas import SemanticAnalysisInputData
+from app.api.features.schemas.sentiment_analysis_schemas import SentimentAnalysisInputData
 from app.api.features.schemas.topic_clustering_schemas import TopicClusteringInputData
 from app.api.features.structured_data_study import run_chain
 from app.api.features.semantic_analysis import run_chain as semantic_analysis_run_chain
 from app.api.features.topic_clustering import run_chain as topic_clustering_run_chain
 from app.api.features.relation_mapping import run_chain as relation_mapping_run_chain
+from app.api.features.sentiment_analysis import run_chain as sentiment_analysis_run_chain
 from app.api.logger import setup_logger
 from app.api.auth.auth import key_check
 
@@ -78,5 +80,14 @@ async def relation_mapping( data: RelationMappingInputData, _ = Depends(key_chec
     logger.info(f"File URL loaded: {data.file_url}")
 
     result = relation_mapping_run_chain(data)
+
+    return result
+
+@router.post("/sentiment-analysis")
+async def sentiment_analysis( data: SentimentAnalysisInputData, _ = Depends(key_check)):
+    
+    logger.info(f"File URL loaded: {data.file_url}")
+
+    result = sentiment_analysis_run_chain(data)
 
     return result
