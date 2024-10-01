@@ -3,6 +3,7 @@ langchain
 langchain-google-genai
 langchain_core
 langchain-community
+langchain_chroma
 langchain_openai
 openai
 jq
