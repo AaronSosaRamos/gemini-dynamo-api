@@ -68,7 +68,7 @@ splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
 def run_chain(input_data: SemanticAnalysisInputData):
     documents = get_docs(input_data.file_url, input_data.file_type, verbose=True)
     if not documents:
-        print("No documents loaded.")
+        logger.info("No documents loaded.")
         return
 
     split_docs = splitter.split_documents(documents)
@@ -85,7 +85,7 @@ def run_chain(input_data: SemanticAnalysisInputData):
 
     output = chain.invoke({'topic': input_data.topic, 'context': context, 'lang': input_data.lang})
 
-    print(output)
+    logger.info(output)
 
     del ensemble_retriever
 

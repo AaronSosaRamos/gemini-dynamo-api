@@ -8,8 +8,10 @@ from app.api.features.schemas.key_concept_retriever_structured_data_schema impor
 from app.api.features.schemas.schemas import VideoAnalysisRequestArgs
 from fastapi import APIRouter, Depends
 from app.api.features.schemas.semantic_analysis_schemas import SemanticAnalysisInputData
+from app.api.features.schemas.topic_clustering_schemas import TopicClusteringInputData
 from app.api.features.structured_data_study import run_chain
 from app.api.features.semantic_analysis import run_chain as semantic_analysis_run_chain
+from app.api.features.topic_clustering import run_chain as topic_clustering_run_chain
 from app.api.logger import setup_logger
 from app.api.auth.auth import key_check
 
@@ -56,5 +58,14 @@ async def submit_tool( data: SemanticAnalysisInputData, _ = Depends(key_check)):
     logger.info(f"File URL loaded: {data.file_url}")
 
     result = semantic_analysis_run_chain(data)
+
+    return result
+
+@router.post("/topic-clustering")
+async def submit_tool( data: TopicClusteringInputData, _ = Depends(key_check)):
+    
+    logger.info(f"File URL loaded: {data.file_url}")
+
+    result = topic_clustering_run_chain(data)
 
     return result
