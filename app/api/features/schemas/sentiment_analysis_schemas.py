@@ -22,6 +22,5 @@ class SentimentAnalysisInput(BaseModel):
 
 class SentimentAnalysisOutput(BaseModel):
     overall_sentiment: SentimentScore = Field(..., description="Overall sentiment and associated score for the entire input text")
-    aspect_sentiments: Optional[List[AspectSentiment]] = Field(None, description="List of sentiments associated with different aspects or features in the input text, if applicable")
-    timestamp: Optional[str] = Field(None, description="Timestamp when the sentiment analysis was completed")
+    aspect_sentiments: List[AspectSentiment] = Field(None, description="List of sentiments associated with different aspects or features in the input text, if applicable")
     language: str = Field(..., description="Language of the analyzed text")

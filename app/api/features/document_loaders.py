@@ -54,7 +54,7 @@ def get_docs(file_url: str, file_type: str, verbose=True):
         return docs
 
     except Exception as e:
-        print(e)
+        logger.info(e)
         logger.error(f"Unsupported file type: {file_type}")
         raise FileHandlerError(f"Unsupported file type", file_url) from e
 

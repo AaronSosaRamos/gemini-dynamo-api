@@ -5,6 +5,10 @@ import requests
 import tempfile
 from langchain_community.document_loaders.json_loader import JSONLoader
 
+from app.api.logger import setup_logger
+
+logger = setup_logger(__name__)
+
 class FileHandler:
     def __init__(self, file_loader, file_extension):
         self.file_loader = file_loader
@@ -30,7 +34,7 @@ class FileHandler:
             else:
               loader = self.file_loader(file_path=temp_file_path)
         except Exception as e:
-            print(f"No such file found at {temp_file_path}")
+            logger.info(f"No such file found at {temp_file_path}")
             raise FileNotFoundError(f"No file found at {temp_file_path}") from e
 
         try:
@@ -40,7 +44,7 @@ class FileHandler:
                   doc.metadata['file_type'] = self.file_extension
                   doc.metadata['processed_at'] = datetime.now().isoformat()
         except Exception as e:
-            print(f"File content might be private or unavailable or the URL is incorrect.")
+            logger.info(f"File content might be private or unavailable or the URL is incorrect.")
             raise ValueError(f"No file content available at {temp_file_path}") from e
 
         # Remove the temporary file
