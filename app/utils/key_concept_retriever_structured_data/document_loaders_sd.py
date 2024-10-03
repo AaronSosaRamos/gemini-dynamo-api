@@ -1,3 +1,4 @@
+from app.api.logger import setup_logger
 from app.utils.key_concept_retriever_structured_data.file_handler_sd import FileHandler
 from langchain_community.document_loaders.csv_loader import CSVLoader
 from langchain_community.document_loaders import UnstructuredExcelLoader, UnstructuredXMLLoader
@@ -5,14 +6,16 @@ from langchain_community.document_loaders.json_loader import JSONLoader
 from typing import List
 from langchain.schema import Document
 
+logger = setup_logger(__name__)
+
 def load_csv_documents(csv_url: str, verbose=False):
     csv_loader = FileHandler(CSVLoader, "csv")
     docs = csv_loader.load(csv_url)
 
     if docs:
         if verbose:
-            print(f"Found CSV file")
-            print(f"Loaded {len(docs)} documents")
+            logger.info(f"Found CSV file")
+            logger.info(f"Loaded {len(docs)} documents")
         return docs
 
 def load_xls_documents(xls_url: str, verbose=False):
@@ -20,8 +23,8 @@ def load_xls_documents(xls_url: str, verbose=False):
     docs = xls_handler.load(xls_url)
     if docs:
         if verbose:
-            print(f"Found XLS file")
-            print(f"Loaded {len(docs)} documents")
+            logger.info(f"Found XLS file")
+            logger.info(f"Loaded {len(docs)} documents")
         return docs
 
 def load_xlsx_documents(xlsx_url: str, verbose=False):
@@ -29,8 +32,8 @@ def load_xlsx_documents(xlsx_url: str, verbose=False):
     docs = xlsx_handler.load(xlsx_url)
     if docs:
         if verbose:
-            print(f"Found XLSX file")
-            print(f"Loaded {len(docs)} documents")
+            logger.info(f"Found XLSX file")
+            logger.info(f"Loaded {len(docs)} documents")
         return docs
 
 def load_xml_documents(xml_url: str, verbose=False):
@@ -38,16 +41,16 @@ def load_xml_documents(xml_url: str, verbose=False):
     docs = xml_handler.load(xml_url)
     if docs:
         if verbose:
-            print(f"Found XML file")
-            print(f"Loaded {len(docs)} documents")
+            logger.info(f"Found XML file")
+            logger.info(f"Loaded {len(docs)} documents")
         return docs
 def load_json_documents(json_url: str, verbose=False):
     json_handler = FileHandler(JSONLoader, 'json')
     docs = json_handler.load(json_url)
     if docs:
         if verbose:
-            print(f"Found JSON file")
-            print(f"Loaded {len(docs)} documents")
+            logger.info(f"Found JSON file")
+            logger.info(f"Loaded {len(docs)} documents")
         return docs
 
 def load_documents(file_url: str, file_type: str, verbose=False) -> List[Document]:
